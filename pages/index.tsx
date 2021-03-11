@@ -45,6 +45,7 @@ const IndexPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
 									description={ep.description}
 									feedId={ep.feedId}
 									episodeId={ep.id}
+									image={ep.image || ep.feedImage}
 								></SummaryCard>
 							))}
 						</section>
@@ -58,6 +59,7 @@ const IndexPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
 									title={recentFeed.title}
 									description={recentFeed.description}
 									feedId={recentFeed.id}
+									image={recentFeed.image}
 								/>
 							))}
 						</section>
@@ -69,6 +71,7 @@ const IndexPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
 									title={recentFeed.title}
 									description={recentFeed.description}
 									feedId={recentFeed.id}
+									image={recentFeed.image}
 								></SummaryCard>
 							))}
 						</section>

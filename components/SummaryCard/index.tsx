@@ -6,16 +6,18 @@ import { ListenLink } from "../ListenLink";
 import { generatePodfriendUrl } from "../ListenLink/utils";
 
 interface SummaryCardProps {
-	title: string;
 	description: string;
 	feedId: number;
+	image: string;
+	title: string;
 	episodeId?: number;
 }
 
 export const SummaryCard: React.FunctionComponent<SummaryCardProps> = (props) => {
 	return (
-		<div className="mx-1 my-4 px-1 py-2 flex-col bg-purple-100 shadow-sm rounded-md">
+		<div className="mx-1 my-4 px-3 py-4 flex-col bg-purple-100 shadow-sm rounded-md">
 			<header className="flex items-center mb-1">
+				<img className="rounded-lg object-cover w-10 h-10 mr-2" src={props.image} />
 				<div className="font-medium text-lg">{props.title}</div>
 			</header>
 			<div className="mb-2">
