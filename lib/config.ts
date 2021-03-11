@@ -14,6 +14,19 @@ export function getValue(key: string): string {
 	return parseValue(process.env[`NEXT_${key}`]);
 }
 
+function processUrlVal(val: string): string {
+	const parsed = val.replace(/\/$/, "");
+	if (parsed.startsWith("http")) {
+		return parsed;
+	}
+
+	if (/:\d+$/.test(parsed)) {
+		return `http://${parsed}`;
+	}
+
+	return `https://${parsed}`;
+}
+
 export const config = {
-	apiBase: getValue("PUBLIC_API_BASE"),
+	apiBase: processUrlVal(getValue("PUBLIC_API_BASE")),
 };
