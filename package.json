@@ -1,15 +1,72 @@
 {
-  "name": "podcast-index-browser",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "10.0.7",
-    "react": "17.0.1",
-    "react-dom": "17.0.1"
-  }
+	"name": "podcast-index-browser",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "npm-run-all -p lint:*",
+		"lint:tsc": "tsc --noEmit",
+		"lint:eslint": "eslint --ext .js,.ts,.tsx .",
+		"lint:prettier": "prettier --check .",
+		"fix": "prettier --write . && eslint --fix --ext .js,.ts,.tsx .",
+		"test": "jest"
+	},
+	"dependencies": {
+		"autoprefixer": "^10.2.4",
+		"date-fns": "^2.18.0",
+		"immer": "^8.0.1",
+		"isomorphic-unfetch": "^3.1.0",
+		"json-stable-stringify": "^1.0.1",
+		"next": "10.0.7",
+		"podcastdx-client": "^4.1.1",
+		"postcss": "^8.2.6",
+		"query-string": "^6.14.1",
+		"ramda": "^0.27.1",
+		"react": "17.0.1",
+		"react-dom": "17.0.1",
+		"react-json-view": "^1.21.1",
+		"react-markdown": "^5.0.3",
+		"swr": "^0.4.2",
+		"tailwindcss": "^2.0.3",
+		"turndown": "^7.0.0"
+	},
+	"devDependencies": {
+		"@testing-library/jest-dom": "^5.11.9",
+		"@testing-library/react": "^11.2.5",
+		"@types/json-stable-stringify": "^1.0.32",
+		"@types/node": "^14.14.31",
+		"@types/ramda": "^0.27.38",
+		"@types/react": "^17.0.2",
+		"@types/turndown": "^5.0.0",
+		"@typescript-eslint/eslint-plugin": "^4.15.2",
+		"@typescript-eslint/parser": "^4.15.2",
+		"@vercel/node": "^1.9.0",
+		"eslint": "^7.21.0",
+		"eslint-config-prettier": "^8.1.0",
+		"eslint-plugin-import": "^2.22.1",
+		"eslint-plugin-prettier": "^3.3.1",
+		"eslint-plugin-react": "^7.22.0",
+		"eslint-plugin-sonarjs": "^0.6.0",
+		"husky": "^5.1.2",
+		"jest": "^26.6.3",
+		"lint-staged": "^10.5.4",
+		"msw": "^0.27.0",
+		"npm-run-all": "^4.1.5",
+		"prettier": "^2.2.1",
+		"ts-jest": "^26.5.2",
+		"typescript": "^4.2.2"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "tsc --noEmit && lint-staged && yarn test"
+		}
+	},
+	"lint-staged": {
+		"*.{js,ts,tsx}": [
+			"prettier --write",
+			"eslint --ext .js,.ts,.tsx --fix"
+		]
+	}
 }
