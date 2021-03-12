@@ -3,6 +3,7 @@ import { pick } from "ramda";
 
 import FormattedHtml from "../FormattedHtml";
 import { ListenLink } from "../ListenLink";
+import { Link } from "../Link";
 import { generatePodfriendUrl } from "../ListenLink/utils";
 
 interface SummaryCardProps {
@@ -10,6 +11,7 @@ interface SummaryCardProps {
 	feedId: number;
 	image: string;
 	title: string;
+	url?: string;
 	episodeId?: number;
 }
 
@@ -24,7 +26,7 @@ export const SummaryCard: React.FunctionComponent<SummaryCardProps> = (props) =>
 				<FormattedHtml text={props.description} />
 			</div>
 			<footer className="flex justify-between">
-				<div></div>
+				<div>{props.url ? <Link href={props.url}>Website</Link> : null}</div>
 				<ListenLink
 					title={props.title}
 					url={generatePodfriendUrl(pick(["feedId", "episodeId"], props))}

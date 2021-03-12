@@ -32,18 +32,20 @@ const Builder: React.FunctionComponent<BuilderProps> = (props) => {
 					<Link href="https://podcastindex-org.github.io/docs-api">docs</Link>
 				</div>
 			</header>
-			<input
-				placeholder="/podcasts/byfeedid?id=75075"
-				className="w-2/3 border border-purple-500 px-1 leading-8"
-				onChange={(ev) => setUrl(ev.target.value)}
-				value={url ?? ""}
-			/>
-			<button
-				type="submit"
-				className="bg-purple-500 hover:bg-purple-900 text-purple-100 font-medium px-4 py-1 ml-3"
-			>
-				Execute
-			</button>
+			<div className="grid grid-cols-5">
+				<input
+					placeholder="/podcasts/byfeedid?id=75075"
+					className="col-span-4 border border-purple-500 px-1 leading-8"
+					onChange={(ev) => setUrl(ev.target.value)}
+					value={url ?? ""}
+				/>
+				<button
+					type="submit"
+					className="bg-purple-500 hover:bg-purple-900 border border-purple-500 text-purple-100 font-medium px-4 py-1 ml-3"
+				>
+					Execute
+				</button>
+			</div>
 		</form>
 	);
 };
