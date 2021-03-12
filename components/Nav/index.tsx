@@ -7,6 +7,7 @@ export const Nav: React.FunctionComponent<NavProps> = (_props) => {
 	const items = [
 		["Home", "/"],
 		["Builder", "/builder"],
+		["Certified", "/certified"],
 	];
 	return (
 		<nav className="bg-purple-500 px-3 py-2">

@@ -1,8 +1,8 @@
-import type { NowRequest, NowResponse } from "@vercel/node";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { client } from "./_lib/index-client";
 import { allowCors } from "./_lib/wrapper";
 
-async function handler(_req: NowRequest, res: NowResponse): Promise<void> {
+async function handler(_req: VercelRequest, res: VercelResponse): Promise<void> {
 	const max = 10;
 
 	const recentNewFeeds = await client.recentNewFeeds({ max });
