@@ -1,33 +1,41 @@
-import stringify from "json-stable-stringify";
-import useSWR from "swr";
-import queryString from "query-string";
-import ReactJson from "react-json-view";
+import { useEffect, useState } from "react";
 
-import { config } from "../../lib/config";
-import fetch from "../../lib/fetch";
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function withQuery(url: string, params: Record<string, any>): string {
-	return `${url}?${queryString.stringify(params)}`;
+interface BuilderProps {
+	params: any[];
+	onParams: (params: any[]) => void;
+	method: string;
+	// onMethod: (method: string) => void;
 }
 
-const method = "recentEpisodes";
+function getFirstParam<T>(params: T[]): T {
+	return params.length ? params[0] : null;
+}
 
-const Episode: React.FunctionComponent = () => {
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-	const { data, error } = useSWR<any, Error>(
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-		[`${config.apiBase}/api/generic`, stringify({ method })],
-		(url: string, params: string) => fetch(withQuery(url, JSON.parse(params)))
+const Builder: React.FunctionComponent<BuilderProps> = (props) => {
+	const [url, setUrl] = useState("");
+
+	useEffect(() => {
+		setUrl(getFirstParam(props.params));
+	}, [getFirstParam(props.params)]);
+
+	return (
+		<form
+			onSubmit={(ev) => {
+				ev.preventDefault();
+				props.onParams([url]);
+			}}
+		>
+			<header className="text-2xl text-purple-500 font-medium">
+				Enter a raw api request below
+			</header>
+			<input
+				placeholder="/podcasts/byfeedid?id=75075"
+				className="w-2/3 border border-purple-500 px-1"
+				onChange={(ev) => setUrl(ev.target.value)}
+				value={url ?? ""}
+			/>
+		</form>
 	);
-
-	if (error) {
-		console.error(error);
-		return <div>API Call Failed</div>;
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-	return <ReactJson src={data} />;
 };
 
-export default Episode;
+export default Builder;

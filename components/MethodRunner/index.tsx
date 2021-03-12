@@ -13,9 +13,7 @@ function withQuery(url: string, params: Record<string, any>): string {
 
 interface MethodRunnerProps {
 	method: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	params?: Record<string, any>;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	params: any[];
 	setResults: (results: any) => void;
 	setStatus: (status: "LOADING" | "ERROR" | "LOADED") => void;
 }
@@ -36,13 +34,10 @@ const MethodRunner: React.FunctionComponent<MethodRunnerProps> = (props) => {
 
 	useEffect(() => {
 		if (error) {
-			console.log("status - error");
 			props.setStatus("ERROR");
 		} else if (!data) {
-			console.log("status - loading");
 			props.setStatus("LOADING");
 		} else {
-			console.log("status - loaded");
 			props.setStatus("LOADED");
 		}
 	}, [data, error]);
@@ -51,10 +46,6 @@ const MethodRunner: React.FunctionComponent<MethodRunnerProps> = (props) => {
 		props.setStatus("LOADING");
 	}, []);
 
-	if (error) {
-		console.error(error);
-		return <div>API Call Failed</div>;
-	}
 	return null;
 };
 

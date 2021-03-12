@@ -28,5 +28,6 @@ function processUrlVal(val: string): string {
 }
 
 export const config = {
-	apiBase: processUrlVal(getValue("PUBLIC_API_BASE")),
+	apiBase: processUrlVal(parseValue(process.env.NEXT_PUBLIC_API_BASE)),
+	mixpanelToken: "975b17e3e364c0ad03cf4b3fa4f51812",
 };

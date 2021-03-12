@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NextPage, GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import useSWR from "swr";
@@ -7,6 +7,7 @@ import fetch from "../lib/fetch";
 import { config } from "../lib/config";
 import { PIApiRecentEpisode, PIApiNewFeed, PIApiPodcast } from "podcastdx-client/dist/src/types";
 import { SummaryCard } from "../components/SummaryCard";
+import mixpanel from "../lib/mixpanel";
 
 interface IndexPageProps {
 	data: {
@@ -23,6 +24,10 @@ const IndexPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
 		fetch,
 		{ initialData }
 	);
+
+	useEffect(() => {
+		mixpanel.track("Viewed Page");
+	}, []);
 
 	return (
 		<div className="container mx-auto">
@@ -87,7 +92,6 @@ const IndexPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
 export default IndexPage;
 
 export const getServerSideProps: GetServerSideProps<IndexPageProps> = async (_context) => {
-	console.log({ config });
 	const data = await fetch<IndexPageProps["data"]>(`${config.apiBase}/api/recent`);
 
 	return {
