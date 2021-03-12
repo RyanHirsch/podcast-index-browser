@@ -7,6 +7,7 @@ import Inspector from "react-json-inspector";
 import { config } from "../lib/config";
 
 import "react-json-inspector/json-inspector.css";
+import mixpanel from "../lib/mixpanel";
 
 const CertifiedPage: NextPage = () => {
 	const [feedUrl, setFeedUrl] = useState<string>("http://mp3s.nashownotes.com/pc20rss.xml");
@@ -30,6 +31,7 @@ const CertifiedPage: NextPage = () => {
 						if (status !== "LOADING" && feedUrl.trim()) {
 							setStatus("LOADING");
 							try {
+								mixpanel.track("Check Certification", { feedUrl });
 								const resp = await fetch(`${config.apiBase}/api/certify`, {
 									headers: {
 										"content-type": "application/json",
