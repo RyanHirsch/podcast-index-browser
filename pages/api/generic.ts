@@ -18,6 +18,8 @@ async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
 		const params = req.query.params as string;
 		const parsed = parse(params);
 
+		console.log(params, parsed);
+
 		const result = await client[method](...asArray(parsed));
 		res.status(200).json(result);
 	}

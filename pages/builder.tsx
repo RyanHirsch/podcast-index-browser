@@ -124,6 +124,13 @@ const BuilderPage: NextPage = () => {
 					/>
 				) : null}
 				{status ? <div className="my-4">Results {status}</div> : null}
+				{method && (!status || !params) ? (
+					<div>
+						The input above accepts any podcast index endpoint. You can enter things like
+						`/categories/list` or `/search/byterm?q=podcasting 2.0` and then hit enter to trigger a
+						search
+					</div>
+				) : null}
 				{results && status === "LOADED" ? <Inspector data={results} /> : null}
 			</main>
 		</div>
