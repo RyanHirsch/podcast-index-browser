@@ -8,6 +8,8 @@ import { config } from "../lib/config";
 
 import "react-json-inspector/json-inspector.css";
 import mixpanel from "../lib/mixpanel";
+import { Badge } from "../components/Badge";
+import { PhaseCertification } from "../components/PhaseCertification";
 
 const CertifiedPage: NextPage = () => {
 	const [feedUrl, setFeedUrl] = useState<string>("http://mp3s.nashownotes.com/pc20rss.xml");
@@ -41,7 +43,7 @@ const CertifiedPage: NextPage = () => {
 								});
 								// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 								const result = await resp.json();
-								setResults(result.__phase);
+								setResults(result);
 								setStatus("LOADED");
 							} catch (err) {
 								setStatus("ERROR");
@@ -68,8 +70,20 @@ const CertifiedPage: NextPage = () => {
 					</div>
 				</form>
 			</main>
-			{results && status === "LOADED" ? <div>CERTIFIED!!</div> : null}
-			{results && status === "LOADED" ? <Inspector data={results} /> : null}
+			{results && status === "LOADED" ? (
+				<div className=" my-8  flex flex-col items-center">
+					<header className="flex items-center">
+						<div className="text-xl">{results.title}</div>
+						<div className="mx-1 text-lg">is</div>
+						{results.__phase && Object.keys(results.__phase).length ? (
+							<Badge />
+						) : (
+							<div>not certified.</div>
+						)}
+					</header>
+					<PhaseCertification phases={results.__phase ?? {}} />
+				</div>
+			) : null}
 		</div>
 	);
 };
