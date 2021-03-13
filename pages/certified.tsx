@@ -74,11 +74,11 @@ const CertifiedPage: NextPage = () => {
 				<div className=" my-8  flex flex-col items-center">
 					<header className="flex items-center">
 						<div className="text-xl">{results.title}</div>
-						<div className="mx-1 text-lg">is</div>
+						<div className="mx-1 text-xl">is</div>
 						{results.__phase && Object.keys(results.__phase).length ? (
 							<Badge />
 						) : (
-							<div>not certified.</div>
+							<div className="text-xl">not certified.</div>
 						)}
 					</header>
 					<PhaseCertification phases={results.__phase ?? {}} />
