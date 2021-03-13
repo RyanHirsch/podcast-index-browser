@@ -35,7 +35,20 @@ export const PhaseCertification: React.FunctionComponent<PhaseCertificationProps
 			name: "Phase 3",
 			status: PhaseStatus.Open,
 			url: "https://github.com/Podcastindex-org/podcast-namespace#phase-3-open",
-			tags: ["license", "id", "social", "category", "contentRating", "previousUrl"],
+			tags: [
+				"license",
+				"id",
+				"social",
+				"category",
+				"contentRating",
+				"previousUrl",
+				"alternateEnclosure",
+				"indexers",
+				"images",
+				"contact",
+				"value",
+				"valueRecipient",
+			],
 		},
 	];
 
