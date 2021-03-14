@@ -62,14 +62,14 @@ export const PhaseCertification: React.FunctionComponent<PhaseCertificationProps
 			<div className="flex justify-center">
 				{phases.map((phase) => (
 					<div
-						className="mx-12 flex flex-col text-center border-4 border-purple-900 rounded"
+						className="mx-12 flex flex-col text-center border-4 border-purple-900 rounded w-56"
 						key={phase.name}
 					>
-						<header className="bg-purple-900 text-purple-50 py-1 pb-2 flex align-middle justify-center">
+						<header className="bg-purple-900 text-purple-50 py-1 pb-2 flex align-middle justify-center font-semibold">
 							<Link href={phase.url}>{phase.name}</Link>
 							{phase.status === PhaseStatus.Open ? <div className="text-xs mx-1">*</div> : null}
 						</header>
-						<ul className="px-3">
+						<ul className="px-3 py-4 mx-2">
 							{phase.tags.map((tag) => {
 								const color = hasPhaseTag(phase, tag) ? "text-purple-900" : "text-purple-300";
 								return (
