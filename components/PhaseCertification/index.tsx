@@ -15,6 +15,7 @@ interface PhaseDef {
 
 interface PhaseCertificationProps {
 	phases: Record<string, string[]>;
+	cors: Record<string, boolean>;
 }
 
 export const PhaseCertification: React.FunctionComponent<PhaseCertificationProps> = (props) => {
@@ -60,6 +61,35 @@ export const PhaseCertification: React.FunctionComponent<PhaseCertificationProps
 	return (
 		<div className="my-8">
 			<div className="flex justify-center">
+				<div className="mx-12 flex flex-col text-center border-4 border-purple-900 rounded w-56">
+					<header className="bg-purple-900 text-purple-50 py-1 pb-2 flex align-middle justify-center font-semibold">
+						CORS
+					</header>
+					<ul className="px-3 py-4 mx-2">
+						{Object.entries(props.cors).map(([name, support]) => {
+							const color = support ? "text-purple-900" : "text-purple-300";
+							return (
+								<li key={name} className="flex my-1">
+									<svg
+										className={`w-6 h-6 mr-2 ${color}`}
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth="2"
+											d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+										></path>
+									</svg>
+									<div className={`${color}`}>{name}</div>
+								</li>
+							);
+						})}
+					</ul>
+				</div>
 				{phases.map((phase) => (
 					<div
 						className="mx-12 flex flex-col text-center border-4 border-purple-900 rounded w-56"

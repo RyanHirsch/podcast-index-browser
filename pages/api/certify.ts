@@ -4,7 +4,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import fetch from "node-fetch";
 
-import { parseFeed } from "./_lib/parser";
+import { parseFeed, checkFeedByObject } from "podcast-partytime";
 import { allowCors } from "./_lib/wrapper";
 
 async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
@@ -26,7 +26,10 @@ async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
 			return;
 		}
 
-		res.status(200).json(feedObj);
+		res.status(200).json({
+			feed: feedObj,
+			cors: await checkFeedByObject({ uri: feedUrl, feedObject: feedObj }),
+		});
 	} catch (err) {
 		console.error(err);
 		res.status(500).send("Boom");

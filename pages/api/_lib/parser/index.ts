@@ -7,6 +7,9 @@
 import parser from "fast-xml-parser";
 import he from "he";
 import crypto from "crypto";
+import * as fs from "fs";
+import * as path from "path";
+import stringify from "fast-json-stable-stringify";
 
 import { log } from "./shared";
 import { parseRss } from "./rss";
@@ -91,6 +94,18 @@ function handleValidFeed(xml: string) {
 		.digest("hex");
 
 	log(feedHash);
+
+	if (process.env.NODE_ENV === "development") {
+		fs.writeFileSync(
+			path.resolve(
+				"/Users/ryanhirsch/projects/podcast-index-browser",
+				// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+				`results/${(feedObj.title ?? "").toLowerCase().replace(/\s+/g, "-").replace(/'/g, "")}.json`
+			),
+			stringify(feedObj)
+		);
+	}
+
 	return feedObj;
 }
 

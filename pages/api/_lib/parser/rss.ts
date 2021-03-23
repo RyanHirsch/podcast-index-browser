@@ -133,6 +133,7 @@ export function parseRss(theFeed: any) {
 
 	//Duplicate pubdate?
 	if (Array.isArray(feedObj.pubDate)) {
+		console.log("check 1");
 		feedObj.pubDate = feedObj.pubDate[0];
 	}
 
@@ -646,18 +647,22 @@ export function parseRss(theFeed: any) {
 	//Make sure we have a valid pubdate if possible
 	if (feedObj.pubDate == "" || feedObj.pubDate == 0 || isNaN(feedObj.pubDate)) {
 		if (typeof feedObj.lastBuildDate !== "string") {
+			console.log("check 1");
 			feedObj.pubDate = 0;
 		} else {
+			console.log("check 2");
 			feedObj.pubDate = feedObj.lastBuildDate;
 		}
 	}
 	if (typeof feedObj.pubDate === "string") {
+		console.log("check 3");
 		feedObj.pubDate = pubDateToTimestamp(feedObj.pubDate);
 	}
 	if (
 		typeof feedObj.newestItemPubDate === "number" &&
 		(typeof feedObj.pubDate !== "number" || feedObj.pubDate == 0)
 	) {
+		console.log("check 4");
 		feedObj.pubDate = feedObj.newestItemPubDate;
 	}
 

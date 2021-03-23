@@ -2,11 +2,9 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import React, { useState } from "react";
-import Inspector from "react-json-inspector";
 
 import { config } from "../lib/config";
 
-import "react-json-inspector/json-inspector.css";
 import mixpanel from "../lib/mixpanel";
 import { Badge } from "../components/Badge";
 import { PhaseCertification } from "../components/PhaseCertification";
@@ -72,16 +70,18 @@ const CertifiedPage: NextPage = () => {
 			</main>
 			{results && status === "LOADED" ? (
 				<div className=" my-8  flex flex-col items-center">
-					<header className="flex items-center">
-						<div className="text-xl">{results.title}</div>
-						<div className="mx-1 text-xl">is</div>
-						{results.__phase && Object.keys(results.__phase).length ? (
-							<Badge />
-						) : (
-							<div className="text-xl">not certified.</div>
-						)}
-					</header>
-					<PhaseCertification phases={results.__phase ?? {}} />
+					<section>
+						<div className="flex items-center">
+							<div className="text-xl">{results.feed.title}</div>
+							<div className="mx-1 text-xl">is</div>
+							{results.feed.__phase && Object.keys(results.feed.__phase).length ? (
+								<Badge />
+							) : (
+								<div className="text-xl">not certified.</div>
+							)}
+						</div>
+					</section>
+					<PhaseCertification phases={results.feed.__phase ?? {}} cors={results.cors} />
 				</div>
 			) : null}
 		</div>
