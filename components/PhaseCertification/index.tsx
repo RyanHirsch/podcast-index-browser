@@ -32,25 +32,25 @@ export const PhaseCertification: React.FunctionComponent<PhaseCertificationProps
 			url: "https://github.com/Podcastindex-org/podcast-namespace#phase-2-closed-on-13121",
 			tags: ["person", "location", "season", "episode"],
 		},
-		{
-			name: "Phase 3",
-			status: PhaseStatus.Open,
-			url: "https://github.com/Podcastindex-org/podcast-namespace#phase-3-open",
-			tags: [
-				"license",
-				"id",
-				"social",
-				"category",
-				"contentRating",
-				"previousUrl",
-				"alternateEnclosure",
-				"indexers",
-				"images",
-				"contact",
-				"value",
-				"valueRecipient",
-			],
-		},
+		// {
+		// 	name: "Phase 3",
+		// 	status: PhaseStatus.Open,
+		// 	url: "https://github.com/Podcastindex-org/podcast-namespace#phase-3-open",
+		// 	tags: [
+		// 		"license",
+		// 		"id",
+		// 		"social",
+		// 		"category",
+		// 		"contentRating",
+		// 		"previousUrl",
+		// 		"alternateEnclosure",
+		// 		"indexers",
+		// 		"images",
+		// 		"contact",
+		// 		"value",
+		// 		"valueRecipient",
+		// 	],
+		// },
 	];
 
 	const hasPhaseTag = (phase: PhaseDef, tag: string): boolean => {
@@ -61,9 +61,9 @@ export const PhaseCertification: React.FunctionComponent<PhaseCertificationProps
 	return (
 		<div className="my-8">
 			<div className="flex justify-center">
-				<div className="mx-12 flex flex-col text-center border-4 border-purple-900 rounded w-56">
+				<div className="mx-12 flex flex-col text-center border-4 border-purple-900 rounded w-72">
 					<header className="bg-purple-900 text-purple-50 py-1 pb-2 flex align-middle justify-center font-semibold">
-						CORS
+						Resource Checks
 					</header>
 					<ul className="px-3 py-4 mx-2">
 						{Object.entries(props.cors).map(([name, support]) => {
@@ -92,7 +92,7 @@ export const PhaseCertification: React.FunctionComponent<PhaseCertificationProps
 				</div>
 				{phases.map((phase) => (
 					<div
-						className="mx-12 flex flex-col text-center border-4 border-purple-900 rounded w-56"
+						className="mx-12 flex flex-col text-center border-4 border-purple-900 rounded w-72"
 						key={phase.name}
 					>
 						<header className="bg-purple-900 text-purple-50 py-1 pb-2 flex align-middle justify-center font-semibold">

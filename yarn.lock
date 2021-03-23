@@ -5528,10 +5528,10 @@ pnp-webpack-plugin@1.6.4:
   dependencies:
     ts-pnp "^1.1.6"
 
-podcast-partytime@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/podcast-partytime/-/podcast-partytime-2.0.0.tgz#19369aa54b1472fc27c991d8464f09885090430d"
-  integrity sha512-gtUfsmGiGMpwVltdRlNKVywnE/RTF43lDueq+m7g63IsBSPjA9z55hkAtzkXZDOmOQHNZ0JPea3OAoc9m07zkQ==
+podcast-partytime@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/podcast-partytime/-/podcast-partytime-2.1.1.tgz#3668f2d5bf688e030d1e77b0d94339757402d716"
+  integrity sha512-4eWk8YB0iRgh0iT3TEaP0KuKEnkWR5b4sd3xmO12iuEyJDhttc6DxQmcqqPzJ37zm7E0V2Bt9cetCtMYzGvFbQ==
   dependencies:
     dotenv "^8.2.0"
     fast-json-stable-stringify "^2.1.0"
