@@ -127,11 +127,14 @@ export const PhaseCertification: React.FunctionComponent<PhaseCertificationProps
 				))}
 			</div>
 			<footer className="text-center mt-3 text-purple-700">
-				See{" "}
-				<Link href="https://github.com/Podcastindex-org/podcast-namespace#element-list">
-					podcast-namespace
-				</Link>{" "}
-				for more information. Phase 3 implementation is still pending.
+				<div>
+					See{" "}
+					<Link href="https://github.com/Podcastindex-org/podcast-namespace#element-list">
+						podcast-namespace
+					</Link>{" "}
+					for more information. Phase 3 implementation is still pending. <br />
+					There is a known issue with libsyn hosted enclosure CORS detection due to redirects.
+				</div>
 			</footer>
 		</div>
 	);
