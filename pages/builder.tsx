@@ -47,6 +47,7 @@ const supportedMethods = new Map<SupportedMethods, MethodConfig>([
 	],
 ]);
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 const BuilderPage: NextPage = () => {
 	const [results, setResults] = useState<JsonObject>(null);
 	const [method, setMethod] = useState<SupportedMethods>(SupportedMethods.Raw);

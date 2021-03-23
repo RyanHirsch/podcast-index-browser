@@ -131,7 +131,7 @@ export const PhaseCertification: React.FunctionComponent<PhaseCertificationProps
 				<Link href="https://github.com/Podcastindex-org/podcast-namespace#element-list">
 					podcast-namespace
 				</Link>{" "}
-				for more information
+				for more information. Phase 3 implementation is still pending.
 			</footer>
 		</div>
 	);
