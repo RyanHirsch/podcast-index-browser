@@ -266,7 +266,9 @@ const GetHelp: React.FunctionComponent<{ selected: string }> = (props) => {
 					<Link href="https://enable-cors.org/" className="underline">
 						enable CORS
 					</Link>
-					.
+					. CORS failure on episode enclosure will not prevent a site from directly playing a
+					podcast, but will prohibit advanced features like skipping silences, boosting volume,
+					showing waveforms, and other features.
 				</p>
 			);
 
