@@ -240,7 +240,7 @@ const ResourceChecks: React.FunctionComponent<{ checks: Record<string, boolean> 
 					</div>
 				))}
 			</div>
-			<div className="h-20 py-4 max-w-5xl w-full text-purple-900">
+			<div className="h-36 py-4 max-w-5xl w-full text-purple-900">
 				<GetHelp selected={helpText} />
 			</div>
 		</>
