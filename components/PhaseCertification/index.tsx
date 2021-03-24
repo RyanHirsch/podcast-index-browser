@@ -146,9 +146,7 @@ export const PhaseCertification: React.FunctionComponent<PhaseCertificationProps
 					the web-based podcasting ecosystem. They do not impact the certification of a podcast,
 					merely a way to help understand how to be most compatible with all community projects.
 				</header>
-				<div className="flex justify-center">
-					<ResourceChecks checks={props.cors} />
-				</div>
+				<ResourceChecks checks={props.cors} />
 
 				<footer className="text-center mt-3 text-purple-900">
 					<div>
@@ -163,7 +161,9 @@ export const PhaseCertification: React.FunctionComponent<PhaseCertificationProps
 
 const ResourceChecks: React.FunctionComponent<{ checks: Record<string, boolean> }> = (props) => {
 	type SupportedType = { name: string; isSupported: boolean };
-	type SupportGroup = { title: string; description: string; items: SupportedType[] };
+	type SupportGroup = { title: string; items: SupportedType[] };
+
+	const [helpText, setHelpText] = React.useState<string>(null);
 
 	const transformed: SupportedType[] = Object.entries(props.checks).map(([name, support]) => ({
 		name,
@@ -179,46 +179,103 @@ const ResourceChecks: React.FunctionComponent<{ checks: Record<string, boolean> 
 	const groups: SupportGroup[] = [
 		{
 			title: "HTTPS",
-			description: "",
+
 			items: getItems("https", transformed),
 		},
 		{
 			title: "CORS",
-			description: "",
+
 			items: getItems("cors", transformed),
 		},
 		{
 			title: "Hotlink",
-			description: "",
 			items: getItems("hotlink", transformed),
 		},
 	];
 
 	return (
 		<>
-			{groups.map(({ title, description, items }) => (
-				<div
-					key={title}
-					className="mx-12 flex flex-col text-center border-4 border-purple-900 rounded w-64"
-				>
-					<header className="bg-purple-900 text-purple-50 py-1 pb-2 flex align-middle justify-center font-semibold">
-						{title}
-					</header>
-					<ul className="px-3 py-4 mx-2">
-						{items.map(({ name, isSupported }) => {
-							const color = isSupported ? "text-purple-900" : "text-purple-400";
-							const Icon = isSupported ? Yes : No;
+			<div className="flex justify-center">
+				{groups.map(({ title, items }) => (
+					<div
+						key={title}
+						className="mx-12 flex flex-col text-center border-4 border-purple-900 rounded w-64"
+					>
+						<header className="bg-purple-900 text-purple-50 py-1 pb-2 flex align-middle justify-center font-semibold">
+							<button
+								type="button"
+								className="flex w-full justify-center"
+								onClick={() => setHelpText(title)}
+							>
+								{title}{" "}
+								<svg
+									className="w-5 ml-2"
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								</svg>
+							</button>
+						</header>
+						<ul className="px-3 py-4 mx-2">
+							{items.map(({ name, isSupported }) => {
+								const color = isSupported ? "text-purple-900" : "text-purple-400";
+								const Icon = isSupported ? Yes : No;
 
-							return (
-								<li key={name} className="flex my-1">
-									<Icon className={`w-6 h-6 mr-2 ${color}`}></Icon>
-									<div className={`${color}`}>{name}</div>
-								</li>
-							);
-						})}
-					</ul>
-				</div>
-			))}
+								return (
+									<li key={name} className="flex my-1">
+										<Icon className={`w-6 h-6 mr-2 ${color}`}></Icon>
+										<div className={`${color}`}>{name}</div>
+									</li>
+								);
+							})}
+						</ul>
+					</div>
+				))}
+			</div>
+			<div className="h-20 py-4 max-w-5xl w-full text-purple-900">
+				<GetHelp selected={helpText} />
+			</div>
 		</>
 	);
+};
+
+const GetHelp: React.FunctionComponent<{ selected: string }> = (props) => {
+	switch ((props.selected ?? "").toLowerCase()) {
+		case "https":
+			return (
+				<p>
+					Ensures your feed&apos;s resources are accessible on secure sites without mixed content
+					warnings.
+				</p>
+			);
+
+		case "cors":
+			return (
+				<p>
+					Ensures your feed and its resources are able to be directly fetched from other sites
+					without the need for a proxy. To enable this you need to adjust the headers returned to
+					include "Access-Control-Allow-Origin". Please see{" "}
+					<Link href="https://enable-cors.org/" className="underline">
+						enable CORS
+					</Link>
+					.
+				</p>
+			);
+
+		case "hotlink":
+			return <p>Ensures your images can be directly embedded by other sites.</p>;
+
+		default:
+			return null;
+	}
+
+	return <div>{props.selected}</div>;
 };
